@@ -26,7 +26,7 @@ EXPOSE 5432
 # This image must forever use UID 26 for postgres user so our volumes are
 # safe in the future. This should *never* change, the last test is there
 # to make sure of that.
-RUN yum -y --setopt=tsflags=nodocs install gettext bind-utils postgresql-server postgresql-contrib nss_wrapper && \
+RUN rpm -i http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm && yum -y --setopt=tsflags=nodocs install gettext bind-utils postgresql-server postgresql-contrib nss_wrapper && \
     yum clean all && \
     localedef -f UTF-8 -i en_US en_US.UTF-8 && \
     mkdir -p /var/lib/pgsql/data && \
