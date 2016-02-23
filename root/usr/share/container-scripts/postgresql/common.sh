@@ -176,7 +176,9 @@ function set_pgdata ()
   # Container should not choose different PGDATA location based on the way how
   # data directory is "mounted";  mount permissions might change among different
   # 'docker run' invocations (openshift/postgresql/issues/76).
-
+  if [ ! -d "${HOME}/data" ]; then
+    mkdir "${HOME}/data"
+  fi
   if [ -O "${HOME}/data" ]; then
     export PGDATA=$HOME/data
   else
